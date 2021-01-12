@@ -84,6 +84,7 @@ Property|Type|Description
 `omma.device.baseAppVersion`|string|Current base version of omma app running on the device
 `omma.device.owner.id`|string|Device owner account id
 `omma.device.owner.name`|number|Device owner account name
+`omma.device.attribute`|object|Device attribute key-value pairs
 
 ### `omma.device.on('update', handler)`
 
@@ -110,6 +111,7 @@ Property|Type|Description
 `omma.shop.orchestrator.internalIp`|string|Shop orchestrator internal (local) ip address
 `omma.shop.orchestrator.platform`|string|Shop orchestrator device platform
 `omma.shop.orchestrator.appVersion`|string|Shop orchestrator device app version
+`omma.shop.attribute`|object|Shop attribute key-value pairs
 
 ### `omma.shop.on('update', handler)`
 
@@ -477,4 +479,18 @@ omma.fs
     .catch(function(err) {
         console.log('An error occured', err);
     });
+```
+
+## Extras
+### `omma.locals` -> `object`
+
+An object which values can be set & get freely. Values of the locals object can be used inside of scene editor's `text elements` by setting value of the element to `{{key}}` where `key` resides in `locals`.
+
+```js
+omma.locals.burgerPrice = 15.34569
+
+/*
+*  Add a scene item and insert a text element with value of:
+*  {{ burgerPrice.toFixed(2) + "$"}}
+*/
 ```

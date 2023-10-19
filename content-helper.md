@@ -96,6 +96,23 @@ omma.device.on('update', function(device) {
 });
 ```
 
+### `omma.device.on('content_event', handler)`
+
+- handler: `Function` A function executed after a message received from the API.
+
+```js
+omma.device.on('content_event', function(payload) {
+    /*
+        payload
+        {
+            timeout: message timeout duration to return an optional response
+            data: data from API request
+            sender: sender user info
+        }
+    */
+});
+```
+
 ## Shop API (`omma.shop`)
 
 Property|Type|Description

@@ -119,6 +119,32 @@ Starts playing. If the player is not initialized, it will be initialized automat
 
 Stops the player.
 
+### Player events
+
+The player re-emits sequencer events under a single event name `playlist_event`. Listen for it to react to playlist and content lifecycle.
+
+**Event:** `playlist_event`
+
+Payload: `{ eventName: string, payload: object }`
+
+| eventName | When emitted | payload |
+|-----------|--------------|---------|
+| `item_started_playing` | An item has started playing | `{ index: number, item: PlaylistItem }` |
+| `item_ended` | An item has finished playing | `{ currentIndex: number, nextIndex: number, numOfPlayedItems: number, item: PlaylistItem }` |
+| `playlist_changed` | The playlist items have changed | `{ items: PlaylistItem[] }` |
+| `content_event_received` | A content event was received (before processing) | `ContentEvent` (see below) |
+| `content_event_processed` | A content event was processed | `data` the data sent in the content event |
+
+`ContentEvent<T>` has `data: T` and `sender: { id: number, ... }`.
+
+Example:
+
+```javascript
+player.on('playlist_event', ({ eventName, payload }) => {
+  console.log('Event:', eventName, 'Payload:', payload);
+});
+```
+
 ## HTML PlaylistItem Custom Hooks
 
 Player preloads the next item before displaying it (if it's possible). Therefore it needs to know whether the item is ready to be displayed. By default, HTML items are considered to be ready 100 ms after it's mounted to DOM.
